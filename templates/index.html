@@ -1,0 +1,262 @@
+<html>
+
+<head>
+  <title>Robot Control Center </title>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+  
+  <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script> 
+</head>
+
+<body>
+  <main>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Robot controller</a>
+      </div>
+      </div>
+    </nav>
+
+
+    <div class="panel-1 col-sm-12" id="box1">
+      <!-- src="{{ url_for('video_feed') }}" width="100%" height="100%" -->
+      <div id="box1-1" class="carousel" data-interval="false">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#box1-1" data-slide-to="0" class="active"></li>
+          <li data-target="#box1-1" data-slide-to="1"></li>
+        </ol>
+    
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner panel-1-left">
+    
+          <div class="item active">
+            <span class="name_tag">
+              <h4>Video feed</h4>
+            </span>
+            <img class="screen" src="{{ url_for('video_feed') }}" alt="Los Angeles" style="width:100%; height: 100%;">
+            <div class="carousel-caption">
+              <h3>SCREEN</h3>
+              <p>Live video feed</p>
+            </div>
+          </div>
+    
+          <div class="item">
+            <span class="name_tag">
+              <h4>Identified Bottle</h4>
+            </span>
+            <img class="screen" src="{{ url_for('pic_bottle') }}" alt="Chicago" style="width:100%; height: 100%;">
+            <div class="carousel-caption">
+              <h3>SCREEN</h3>
+              <p>Last identified bottle</p>
+            </div>
+          </div>
+        </div>
+    
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#box1-1" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#box1-1" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    
+      <div class="panel-1-right col-sm-12" id="box1-2">
+        <span class="name_tag_right">
+          <h4>Movement control</h4>
+        </span>
+        <div class="container" id="control_buttons">
+          <div class="button-container">
+            <button id="motor-forward-btn" class="motor_control_buttons"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="currentColor" class="bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+                <path
+                  d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0z" />
+              </svg>FORWARD</button>
+          </div>
+          <div class="button-container">
+            <button id="motor-left-btn" class="motor_control_buttons"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                <path
+                  d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z" />
+              </svg>LEFT</button>
+            <button id="motor-backwards-btn" class="motor_control_buttons"><svg xmlns="http://www.w3.org/2000/svg"
+                width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                <path
+                  d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0z" />
+              </svg>BACKWARD</button>
+            <button id="motor-right-btn" class="motor_control_buttons"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                height="16" fill="currentColor" class="bi bi-arrow-right-square-fill" viewBox="0 0 16 16">
+                <path
+                  d="M0 14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v12zm4.5-6.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5a.5.5 0 0 1 0-1z" />
+              </svg>RIGHT</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row panel-right" id="box1-3">
+        <div class="panel-right-1 col-sm-12">
+          <span class="name_tag_right">
+            <h4>Actions</h4>
+          </span>
+          <div class="container" id="action_buttons">
+            <div class="action_buttons">
+              <button class="action_button" id="bottle-tracking-btn">Bottle Picking</button><br>
+              <button class="action_button" id="line-following-btn">Line Following</button><br>
+              <button class="action_button" id="line-tracking-btn">Line Tracking</button><br>
+              <button class="action_button"></button>
+            </div>
+          </div>
+        </div>
+    
+        <div class="panel-right-2 col-sm-12">
+          <span class="name_tag_right">
+            <h4>Test Units</h4>
+          </span>
+          <div class="row" id="testUnits_box">
+            <div class="col-md-6">
+              <ul class="test_list">
+                <span>
+                  <p>Motors</p>
+                  <button class="test_button" id="testMotors">Test</button>
+                </span>
+                <span>
+                  <p>LED</p>
+                  <button class="test_button" id="testLEDs">Test</button>
+                </span>
+<!--
+                <span>
+                  <p>Line Tracking</p>
+                  <button class="test_button" id="testLineTracking">Test</button>
+                </span>
+-->
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="test_list">
+                <span>
+                  <p>Servo</p>
+                  <button class="test_button" id="testServ" style="background-color: blue;">Test</button>
+                </span>
+                <span>
+                  <p>Ultrasonic</p>
+                  <button class="test_button" id="testUltrasonic">Test</button>
+                </span>
+              </ul>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+
+
+    <div class="panel-2 col-sm-12" id="box2">
+      <div class="meter-screen " id="box2-1">
+        <div class="sensor-reading">
+          <h2>Ultrasonic Sensor Reading</h2>
+          <p id="sensor-value">--</p>
+        </div>
+        <div class="battery-percentage">
+          <h2 style="color: blue;">Battery Percentage</h2>
+          <p id="battery-value" style="color: blue;">--</p>
+        </div>
+      </div>
+
+
+      <div class="instructions col-sm-12" id="box2-2">
+        <span class="name_tag_right">
+          <h4>Instructions</h4>
+        </span>
+        <div class="row" id="instruction_box">
+          <div class="col-md-6 inst_div">
+            <h2 class="inst_head">Move control</h2>
+            <ul class="inst_list">
+              <p>W - Forward</p>
+              <p>s - Backward</p>
+              <p>a - Left</p>
+              <p>d - Right</p>
+            </ul>
+          </div>
+          <div class="col-md-6 inst_div right">
+            <h2 class="inst_head">Arm control</h2>
+            <ul class="inst_list">
+              <p>J - left</p>
+              <p>L - right</p>
+              <p>I - arm up</p>
+              <p>K - arm down</p>
+              <p>P - hand up</p>
+              <p>; - hand down</p>
+              <p>U - grab</p>
+              <p>O - loose</p>
+              <p>Y - camera up</p>
+              <p>H - camera down</p>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-right-2 col-sm-12" id="box2-3">
+        <span class="name_tag_right">
+          <h4>Robotic Arm control</h4>
+        </span>
+        <div class="row" id="testUnits_box">
+          <div class="col-md-6">
+            <ul class="test_list">
+              <span>
+                <button class="servo_button" id="servo-left-btn">Left</button>
+              </span>
+              <span>
+                <button class="servo_button" id="servo-arm-up-btn">Arm Up</button>
+              </span>
+              <span>
+                <button class="servo_button" id="servo-hand-up-btn">Hand Up</button>
+              </span>
+              <span>
+                <button class="servo_button" id="gripper-close">Grab</button>
+              </span>
+              <span>
+                <button class="servo_button" id="camera-up">Camera Up</button>
+              </span>
+            </ul>
+          </div>
+          <div class="col-md-6">
+            <ul class="test_list">
+              <span>
+                <button class="servo_button" id="servo-right-btn">Right</button>
+              </span>
+              <span>
+                <button class="servo_button" id="servo-arm-down-btn">Arm Down</button>
+              </span>
+              <span>
+                <button class="servo_button" id="servo-hand-down-btn">Hand Down</button>
+              </span>
+              <span>
+                <button class="servo_button" id="gripper-open">Loose</button>
+              </span>
+              <span>
+                <button class="servo_button" id="camera-down">Camera Down</button>
+              </span>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+    <script src="../static/jquery-3.6.0.min.js" type="text/javascript"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
+
+    <script type="text/javascript" src="{{url_for('static', filename='index.js')}}"> 
+    </script>
+</body>
+
+</html>
+
